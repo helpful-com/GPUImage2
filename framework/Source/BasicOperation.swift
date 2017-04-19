@@ -180,6 +180,9 @@ open class BasicOperation: ImageProcessingOperation {
             let outputRotation = overriddenOutputRotation ?? inputFramebuffer.orientation.rotationNeededForOrientation(.portrait)
             uniformSettings["aspectRatio"] = inputFramebuffer.aspectRatioForRotation(outputRotation)
         }
+        if let seconds = inputFramebuffer.timingStyle.timestamp?.seconds() {
+            uniformSettings["frameTime"] = Float(seconds)
+        }
     }
     
     public func transmitPreviousImage(to target:ImageConsumer, atIndex:UInt) {
